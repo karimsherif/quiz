@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<f:view contentType="text/html">
+
+	<h:head>
+
+		<title></title>
+	</h:head>
+
+	<body>
+		<h:form id="t1">
+			<div id="main">
+
+				<!-- Header -->
+				<div id="pan_logo">
+
+					<h1>
+						<a href="http://www.google.com.xhtml" title="[Go to google]">
+							<!--   <p:graphicImage id="pan_logo" url="../../resources/images/#{loginUserBean.loginUserEntity.logoFileName}" height="100" width="220" /> -->
+
+						</a>
+					</h1>
+
+				</div>
+				<!-- /header -->
+
+
+				<!-- Tray -->
+				<div>
+					<p:menubar autoSubmenuDisplay="true" id="menu">
+						<p:submenu label="Admin" rendered="#{user.group.groupId=='1'}">
+							<p:menuitem value="Create user" url="customerInfoEdit.xhtml" />
+						</p:submenu>
+
+						<p:submenu label="Supervisor"
+							rendered="#{user.group.groupId=='2'}">
+							<p:commandLink value="Me Is Supervisor" immediate="true"
+								ajax="false" />
+						</p:submenu>
+
+						<p:submenu label="Puplisher" rendered="#{user.group.groupId=='2'}">
+							<p:menuitem value="Me Is Puplisher" url="customerInfoEdit.xhtml" />
+						</p:submenu>
+
+						<p:submenu label="Comments Editor"
+							rendered="#{user.group.groupId=='2'}">
+							<p:commandLink value="Me Is Comments Editor" immediate="true"
+								ajax="false" />
+						</p:submenu>
+
+						<p:submenu label="Opinions Editor"
+							rendered="#{user.group.groupId=='2'}">
+							<p:commandLink value="Me Is Opinions Editor" immediate="true"
+								ajax="false" />
+						</p:submenu>
+
+
+					</p:menubar>
+				</div>
+				<!-- /tray -->
+
+				<div>
+					<ui:insert name="content">
+					</ui:insert>
+				</div>
+
+				<!-- Footer -->
+				<div id="footer">all right reserved</div>
+				<!-- /footer -->
+			</div>
+			<!-- /main -->
+
+		</h:form>
+	</body>
+</f:view>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<body>
+	<h:form id="quizMenu_frm">
+
+		<ui:remove>
+			<p:menubar id="eesnueBar" model="#{menuBean.getMenu(2)}"
+				autoDisplay="true" style="font-size:small" />
+		</ui:remove>
+
+		<p:menubar autoSubmenuDisplay="false" id="menu"
+			style="font-size:small" autoDisplay="false">
+			<p:menuitem value="Home" url="/quiz/home.xhtml" icon="ui-icon-home"
+				immediate="true" onstart="waiteDialog.show()" />
+			<p:submenu label="Quiz" icon="ui-icon-gear">
+				<p:menuitem value="Add Quiz" immediate="true" ajax="false"
+					icon="ui-icon-plusthick" url="/quiz/quizDetails.xhtml"
+					onstart="PF('waiteDialog').show();" />
+				<p:menuitem value="Search Quiz" immediate="true" ajax="false"
+					icon="ui-icon-search" url="/quiz/quizSearch.xhtml"
+					onstart="PF('waiteDialog').show();" />
+			</p:submenu>
+		</p:menubar>
+	</h:form>
+</body>
+</html>

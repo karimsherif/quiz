@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>login</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css"
+		href="./../../resources/css/login_index.css" />
+</h:head>
+<h:body>
+	<div align="center">
+		<!-- Start main div -->
+		<div class="container">
+			<div class="main">
+				<!-- Start loginArea div-->
+				<div class="loginArea">
+					<ui:insert name="content" />
+					<p:dialog modal="true" width="250" widgetVar="ajaxStatusDialog"
+						header="Loading..." draggable="false" closable="false"
+						resizable="false"></p:dialog>
+				</div>
+				<!--/ * End loginArea  div-->
+				<!-- Start compLogoArea div-->
+				<div class="compLogoArea">
+					<p:graphicImage value="../resources/images/loginLogo.gif"
+						styleClass="compLogoAreaImg" />
+				</div>
+
+				<!--/ * End compLogoArea div-->
+			</div>
+			<!--/ * End main div -->
+			<!--/ * start blackArea div -->
+			<div class="blackArea" />
+			<!--/ * End blackArea div -->
+			<div class=".blackLineArea">
+				<p:graphicImage value="../resources/images/loginFotterCurve.gif"
+					styleClass="blackLineArea" />
+			</div>
+			<div class="shadowArea">
+				<p:graphicImage value="../resources/images/loginShadow.gif"
+					styleClass="shadowArea" />
+			</div>
+			<div class="ntgLogo">
+				<p:graphicImage value="../resources/images/loginNtgLogo.gif"
+					styleClass="ntgLogo" />
+			</div>
+			<!--/ * End blackArea div -->
+		</div>
+		<!--/ * End container div -->
+	</div>
+</h:body>
+</html>
+

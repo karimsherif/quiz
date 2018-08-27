@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="title">َQuiz Search</ui:define>
+		<ui:define name="manuBar">
+			<ui:include src="/quiz/quizMenu.xhtml" />
+		</ui:define>
+		<ui:define name="content">
+			<h:form id="quiz_search_frm" enctype="multipart/form-data">
+				<p:panel header="Quiz Searach">
+					<p:messages id="quizMsgs" />
+					<p:panel header="Search Details" toggleable="true">
+						<h:panelGrid id="search_quiz_pan" columns="4">
+							<h:outputText value="Quiz Description" />
+							<p:inputText value="#{quizSearchBean.quiz.description}" />
+
+							<ui:remove>
+								<h:outputText value="From Date" />
+								<p:calendar pattern="dd/mm/yyyy"
+									value="#{quizSearchBean.creationDateFrom}" />
+
+
+								<h:outputText value="To Date" />
+								<p:calendar pattern="dd/mm/yyyy"
+									value="#{quizSearchBean.creationDateTo}" />
+							</ui:remove>
+						</h:panelGrid>
+						<p:commandButton value="Search" icon="ui-icon-search"
+							actionListener="#{quizSearchBean.searchQuiz}"
+							onstart="PF('waiteDialog').show();"
+							oncomplete="PF('waiteDialog').hide();" update="quizSearch_pan" />
+
+					</p:panel>
+
+					<p:panel id="quizSearch_pan" header="Search Quia Result"
+						toggleable="true">
+
+						<p:dataTable id="quizSearch_tb" paginator="true" rows="10"
+							value="#{quizSearchBean.quizList}" var="quiz"
+							rowsPerPageTemplate="5,10,15,20,25,50" lazy="true"
+							currentPageReportTemplate="number {startRecord}-{endRecord} from {totalRecords}"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+							emptyMessage="No Data Found">
+
+							<p:column exportable="false">
+								<f:facet name="header">
+									<h:outputText value="Image" />
+								</f:facet>
+								<h:graphicImage id="imgName" value="/images/?fileName=#{quiz.imgName}"
+									width="50" height="50" style="border-radius: 50%;cursor: pointer" />
+								
+								<p:tooltip id="toolTipImgName" for="imgName" >
+									<p:graphicImage width="400" height="400" value="/images/?fileName=#{quiz.imgName}" />
+								</p:tooltip>
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Description" />
+								</f:facet>
+								<h:outputText value="#{quiz.description}" />
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Creation Date" />
+								</f:facet>
+								<h:outputText value="#{quiz.creationDate}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Is Public" />
+								</f:facet>
+								<h:outputText value="#{quiz.isPublic}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Quiz Url"/>
+								</f:facet>
+								<h:outputText id="quizUrl" value="#{quiz.quizUrl}"  style="cursor: pointer"/>
+								<p:tooltip id="quizUrl_toolTip" for="quizUrl"
+									value="#{quiz.quizUrl}" position="top" />
+							</p:column>
+
+							<p:column exportable="false">
+								<f:facet name="header">
+									<h:outputText value="Options" />
+								</f:facet>
+
+								<p:commandButton value="View" icon="ui-icon-search" title="View"
+									action="#{quizSearchBean.toQuizDetails()}"
+									onstart="PF('waiteDialog').show();"
+									style="white-space:nowrap;text-align: center;font-size: smaller">
+									<f:setPropertyActionListener
+										target="#{quizSearchBean.selectedQuizId}" value="#{quiz.id}" />
+								</p:commandButton>
+							</p:column>
+							<f:facet name="footer">
+								<h:commandLink>
+									<p:graphicImage value="/resources/images/excel.png"
+										style="border:0px;" alt="all quiz" />
+									<p:dataExporter type="xls" target="quizSearch_tb"
+										fileName="All_Quiz" />
+								</h:commandLink>
+							</f:facet>
+						</p:dataTable>
+					</p:panel>
+				</p:panel>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view>
+
+	<h:head>
+
+		<link rel="stylesheet" media="screen,projection" type="text/css"
+			href="../resources/css/main.css" />
+
+		<link rel="stylesheet" media="screen,projection" type="text/css"
+			href="../resources/css/style.css" />
+		<link rel="stylesheet" media="print" type="text/css"
+			href="../resources/css/print.css" />
+		<link rel="stylesheet" type="text/css"
+			href="../resources/css/component.css" />
+
+		<link type="text/css" rel="stylesheet"
+			href="../themes/#{themeBean.theme}/skin.css" />
+		<title>Login</title>
+	</h:head>
+	<h:body>
+
+		<h:form id="t1">
+			<div id="main">
+				<div id="pan_logo">
+
+					<h1>
+						<a href="./" title="[Go to homepage]"> <!--   <p:graphicImage id="pan_logo" url="../../resources/images/mobily-logo.png" height="80" width="220" />-->
+							well come
+						</a>
+					</h1>
+				</div>
+				<div>
+					<ui:insert name="content"></ui:insert>
+				</div>
+
+
+				<!-- Footer -->
+
+				<div id="footer" style="height: 1px"
+					class="ui-widget ui-widget-header ui-corner-all">
+					<p class="copyright">Designed and programed by Karim Serif
+						Mohamed</p>
+				</div>
+				<!-- /footer -->
+
+			</div>
+			<!-- /main -->
+
+		</h:form>
+	</h:body>
+</f:view>
+</html>
+

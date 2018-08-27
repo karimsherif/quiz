@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="title">َDo Quiz</ui:define>
+		<ui:define name="content">
+			<h:form id="doQuiz_frm" enctype="multipart/form-data">
+				<p:panel id="questions_Pan" header="Quiz Details">
+					<p:messages id="quizMsgs" />
+
+					<h:panelGrid id="questions_PanG" columns="1"
+						rendered="#{!doQuizBean.isFinished}">
+
+						<h:outputText
+							value="#{doQuizBean.currentQuestionAnswerResult.question.question}" />
+
+						<p:selectOneRadio
+							value="#{doQuizBean.currentQuestionAnswerResult.answer}"
+							columns="1" layout="grid">
+							<f:selectItems
+								value="#{doQuizBean.currentQuestionAnswerResult.question.answers}"
+								var="answer" itemLabel="#{answer.answerTxt}"
+								itemValue="#{answer}" />
+							<f:converter converterId="answerConverter"></f:converter>
+						</p:selectOneRadio>
+
+					</h:panelGrid>
+
+
+					<p:commandButton value="Next" icon="fa fa-arrow-right"
+						id="next_btn"
+						rendered="#{doQuizBean.questionAnswerList.size()-1 ne doQuizBean.currentIndex}"
+						actionListener="#{doQuizBean.toNext}" update="questions_Pan" />
+
+					<p:commandButton value="Finish" icon="fa fa-check" id="finish_btn"
+						rendered="#{doQuizBean.questionAnswerList.size()-1 eq doQuizBean.currentIndex and !doQuizBean.isFinished}"
+						actionListener="#{doQuizBean.finish}" update="questions_Pan" />
+
+					<h:panelGroup id="sendQuizResult_PanG">
+						<h:panelGroup rendered="#{doQuizBean.isFinished}">
+						<h:outputText value="Kindly fill below Details to send quiz result yo you"/>
+						
+							<ui:include src="/quiz/sendQuizResult.xhtml" />
+						</h:panelGroup>
+
+					</h:panelGroup>
+
+				</p:panel>
+
+			</h:form>
+
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

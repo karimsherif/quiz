@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="quiz_manager">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+		<jta-data-source>java:jboss/QuizDS</jta-data-source>
+		<mapping-file>META-INF/Queries.xml</mapping-file>
+
+		<!-- TODO Scan here for all classes -->
+		<class>com.ksh.quiz.entity.Answer</class>
+		<class>com.ksh.quiz.entity.AnswerType</class>
+		<class>com.ksh.quiz.entity.Owner</class>
+		<class>com.ksh.quiz.entity.QuestionAnswerResult</class>
+		<!-- <class>com.ksh.quiz.entity.QuizVisitor</class> -->
+		<class>com.ksh.quiz.entity.Visitor</class>
+
+		<properties>
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQLDialect" />
+
+			<property name="hibernate.connection.driver_class"
+				value="com.mysql.jdbc.Driver" />
+
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="false" />
+
+		</properties>
+	</persistence-unit>
+</persistence>

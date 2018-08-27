@@ -1,0 +1,81 @@
+@CHARSET "UTF-8";
+
+body {
+	background-image: url('../../images/loginBg.gif');
+	/* background: url("#{resource['images/loginBg.gif']}"); */
+	font-size: 14px;
+	font-family: Verdana, "Verdana CE", Arial, "Arial CE",
+		"Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+	margin-top: 0px;
+}
+
+.container {
+	/* width: 1024px; */
+	height: auto;
+	/* padding-left: 10%; */
+	/* padding-right: 10%; */
+	margin: 0px 0px 0px 0px;
+}
+
+.header {
+	margin: 0px 0px 0px 0px;
+	padding-top: 0px;
+	width: 100%;
+	height: 40px; /* 240px; */
+}
+
+.banner {
+	width: 100%;
+	height: 200px;
+	border-radius: 8px 8px 8px 8px;
+}
+
+.manuBar {
+	width: 100%;
+	height: 20px;
+	margin: 0px 0px 10px 0px;
+}
+
+.content {
+	width: 100%;
+	height: auto;
+}
+
+.footer {
+	width: 100%;
+	height: 100px;
+	text-align: center;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+}
+
+.index_Controing_Body {
+	font-family: Tahoma, Arial;
+	font-size: 11px;
+	font-weight: bold;
+	color: #999999;
+	/* background: url("#{resource['images/loginBg.gif']}"); */
+	background-image: url('../../images/loginBg.gif');
+	margin-top: 150px;
+	padding: 0px;
+}
+
+.ui-messages-info {
+	/* margin: 0px 0px 0px 0px !important;  */
+	
+}
+
+.button-style {
+	/* height: 30px; */
+	font-size: small;
+}
+
+.highlight {
+	background-color: #6CE26C !important;
+	background-image: none !important;
+	color: #000000 !important;
+}
+.yourdiv
+{
+    display: inline;
+}

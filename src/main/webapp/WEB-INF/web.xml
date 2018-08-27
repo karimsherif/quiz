@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>Quiz</display-name>
+	<context-param>
+		<param-name>javax.faces.CONFIG_FILES</param-name>
+		<param-value>/WEB-INF/faces-config.xml,/WEB-INF/faces-config-quiz.xml</param-value>
+	</context-param>
+
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>/quiz/home.xhtml</welcome-file>
+	</welcome-file-list>
+
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>redmond</param-value>
+		<!-- https://www.primefaces.org/themes.html -->
+	</context-param>
+	<context-param>
+		<param-name>primefaces.FONT_AWESOME</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+
+	<!-- <filter>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+		<init-param>
+			<param-name>uploadDirectory</param-name>
+			<param-value>../resources/images</param-value>
+		</init-param>
+		<init-param>
+			<param-name>thresholdSize</param-name>
+			<param-value>951200000</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+	</filter-mapping> -->
+
+
+	<env-entry>
+		<env-entry-name>java:global/resourcsFolder</env-entry-name>
+		<env-entry-type>java.lang.String</env-entry-type>
+		<env-entry-value>E:/projects/Quiz/resourcesFolder</env-entry-value>
+	</env-entry>
+	<env-entry>
+		<env-entry-name>java:global/QuizURL</env-entry-name>
+		<env-entry-type>java.lang.String</env-entry-type>
+		<env-entry-value>http://62.114.122.80:8080/Quiz/quiz/doQuiz.xhtml?q=%quizCode%</env-entry-value>
+	</env-entry>
+
+</web-app>

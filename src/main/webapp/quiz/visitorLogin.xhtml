@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>login</title>
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/resources/en/css/login_index.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/themes/#{themeBean.theme}/skin.css" />
+</h:head>
+<h:body dir="rtl">
+
+	<h:form id="login_frm">
+		<div style="padding-right: 35%; padding-top: 15%;">
+			<p:panel header="#{msgs.Administration_Login_PanelHeader}"
+				style="font-size: 12px;font-style: italic;width: 400px;height:250px;">
+
+				<h:panelGrid columns="2">
+					<h:outputText value="#{msgs.Administration_User_UserName}" />
+					<p:inputText required="param['login_frm:login_btn']"
+						requiredMessage="#{msgs.Administration_User_UserNameRequired }"
+						id="name" value="#{loginBean.userName}" />
+
+					<h:outputText value="#{msgs.Administration_User_Password}" />
+					<p:password id="pass"
+						requiredMessage="#{aqarMsgsmsgs.Administration_User_PasswordRequired}"
+						value="#{loginBean.password}"
+						required="param['login_frm:login_btn']" feedback="false" />
+
+				</h:panelGrid>
+				<br />
+				<h:panelGrid columns="2">
+					<p:selectBooleanCheckbox value="#{loginBean.rememberMe}" />
+					<h:outputText value="#{msgs.Administration_Login_RememberMe}" />
+				</h:panelGrid>
+				<p:commandLink onclick="PF('forgetPassDlg').show();"
+					immediate="true"
+					value="#{msgs.Administration_Login_ForgetPassword}" />
+				<br />
+				<br />
+				<p:commandButton id="login_btn"
+					value="#{msgs.Administration_Login_LoginButton}" update="loginMsg"
+					action="#{loginBean.loginUser}" onclick="PF('dialog').show();"
+					oncomplete="PF('dialog').hide();" />
+				<p:spacer height="20" width="20" />
+				<p:messages id="loginMsg" />
+			</p:panel>
+
+			<p:dialog header="waiting" modal="true" widgetVar="dialog"
+				closable="false" draggable="false" resizable="false"
+				style="font-size: 15px;font-family: times ">
+				<h:graphicImage value="../resources/images/ajaxLoadingBar.gif" />
+			</p:dialog>
+
+			<p:dialog header="#{msgs.Administration_Login_ForgetPassword}"
+				modal="true" widgetVar="forgetPassDlg" closable="true"
+				draggable="false" resizable="false"
+				style="font-size: 15px;font-family: times ">
+				<p:inputText value="#{loginBean.email}" />
+				<p:commandButton value="#{msgs.Administration_Login_SendEmail}"
+					ajax="true" update="loginMsg" actionListener="#{loginBean.forgetPassword}"
+					onstart="PF('dialog').show();"
+					oncomplete="PF('dialog').hide(); PF('forgetPassDlg').hide();" />
+
+			</p:dialog>
+		</div>
+	</h:form>
+</h:body>
+</html>
+

@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title><ui:insert name="title" /></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/resources/en/css/login_index.css" />
+	<link rel="stylesheet" type="text/css"
+		href="../../themes/#{themeBean.theme}/skin.css" />
+	<!--
+<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/resources/en/css/login_index.css" />
+-->
+</h:head>
+<body>
+	<div class="container">
+		<div class="header">
+			<ui:include src="/incloudes/header.xhtml" />
+		</div>
+
+		<div class="content">
+			<ui:insert name="content" />
+			<p:dialog header="waiting" modal="true" widgetVar="waiteDialog"
+				closable="false" draggable="false" resizable="false"
+				style="font-size: 15px;font-family: times ">
+				<h:graphicImage value="../../resources/images/ajaxLoadingBar.gif" />
+			</p:dialog>
+		</div>
+		<div class="footer">
+			<ui:include src="/incloudes/foter.xhtml" />
+		</div>
+	</div>
+
+</body>
+</html>

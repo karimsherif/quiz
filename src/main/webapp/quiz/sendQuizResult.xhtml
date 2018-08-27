@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<body>
+
+		<h:panelGrid columns="3">
+			<h:outputText value="User Name" />
+			<h:outputText value=":" />
+			<p:inputText value="#{sendQuizResultBean.visitor.userName}"
+				required="true" requiredMessage="You Have to enter user name" />
+
+			<h:outputText value="Password" />
+			<h:outputText value=":" />
+			<p:inputText value="#{sendQuizResultBean.visitor.password}"
+				required="true" requiredMessage="You Have to enter password" />
+
+			<h:outputText value="Email" />
+			<h:outputText value=":" />
+			<p:inputText value="#{sendQuizResultBean.visitor.email}"
+				required="true" requiredMessage="You Have to enter email" />
+
+
+		</h:panelGrid>
+
+		<p:commandButton id="sendQuizResult_btn" icon="ui-icon-mail-closed" value="Send"
+			action="#{sendQuizResultBean.SendQuizResult}"
+			onstart="PF('waiteDialog').show();"
+			oncomplete="PF('waiteDialog').hide();" 
+			update="quizMsgs"/>
+
+
+
+</body>
+</html>

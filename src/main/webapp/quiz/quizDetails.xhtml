@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="title">َQuiz Details</ui:define>
+		<ui:define name="manuBar">
+			<ui:include src="/quiz/quizMenu.xhtml" />
+		</ui:define>
+		<ui:define name="content">
+			<h:form id="quiz_frm" enctype="multipart/form-data">
+				<p:panel header="Quiz Details">
+					<p:messages id="quizMsgs" />
+
+					<h:panelGrid columns="3">
+
+						<h:outputText value="Description" />
+						<h:outputText value=":" />
+						<p:inputText value="#{quizDetailsBean.quiz.description}" />
+
+						<h:outputText value="URL" />
+						<h:outputText value=":" />
+						<h:outputText value="#{quizDetailsBean.quiz.quizUrl}" />
+
+						<h:outputText value="Is Public" />
+						<h:outputText value=":" />
+						<p:selectBooleanCheckbox value="#{quizDetailsBean.quiz.isPublic}" />
+						
+						<h:outputText value="External Link" />
+						<h:outputText value=":" />
+						<p:inputText value="#{quizDetailsBean.quiz.externalLink}" />
+
+						<h:outputText value="Image" />
+						<h:outputText value=":" />
+						<p:fileUpload value="#{quizDetailsBean.file}" mode="simple"
+							skinSimple="true" />
+
+						<h:outputText value="Image Name" rendered="#{quizDetailsBean.quiz.imgDisplayName ne null}"/>
+						<h:outputText value=":" rendered="#{quizDetailsBean.quiz.imgDisplayName ne null}"/>
+						<h:outputText value="#{quizDetailsBean.quiz.imgDisplayName}" rendered="#{quizDetailsBean.quiz.imgDisplayName ne null}"/>
+
+					</h:panelGrid>
+
+					<p:dataTable id="qt_tb" paginator="false" rows="10"
+						value="#{quizDetailsBean.questionList}" var="question"
+						rowsPerPageTemplate="5,10,15,20,25,50"
+						currentPageReportTemplate="Number {startRecord}-{endRecord} From {totalRecords}"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						emptyMessage="No Data Found">
+
+						<f:facet name="header">
+							<h:outputText value="Questions" />
+						</f:facet>
+
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Question" />
+							</f:facet>
+							<h:outputText value="#{question.question}" />
+						</p:column>
+
+						<f:facet name="footer">
+
+							<p:commandButton value="Add Question" icon="ui-icon-plus"
+								id="add_btn"
+								actionListener="#{quizDetailsBean.prepareToAddQuestion}"
+								onstart="PF('waiteDialog').show();"
+								oncomplete="PF('waiteDialog').hide();PF('addQuestionDlg').show();"
+								update=":quiz_frm:addQuestion_panG :quiz_frm:qat_tb" />
+
+							<p:commandButton value="Save" icon="ui-icon-disk" id="save_btn"
+								actionListener="#{quizDetailsBean.SaveQuizWithQuestions}"
+								ajax="false" onstart="PF('waiteDialog').show();"
+								oncomplete="PF('waiteDialog').hide();"
+								update=":quiz_frm:quizMsgs" />
+
+						</f:facet>
+					</p:dataTable>
+
+				</p:panel>
+
+
+				<p:dialog widgetVar="addQuestionDlg" header="Add Question"
+					modal="true" resizable="true" closable="true" width="600">
+					<h:panelGrid id="addQuestion_panG" columns="3">
+
+						<h:outputText value="Question" />
+						<h:outputText value=":" />
+						<p:inputText value="#{quizDetailsBean.question.question}" />
+
+						<h:outputText value="Question" />
+						<h:outputText value=":" />
+						<p:selectOneMenu value="#{quizDetailsBean.question.answerTypeId}">
+							<f:selectItem itemValue="" itemLabel="" />
+							<f:selectItems value="#{quizDetailsBean.answerTypeList}" var="t"
+								itemValue="#{t.id}" itemLabel="#{t.name}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Notes" />
+						<h:outputText value=":" />
+						<p:inputTextarea value="#{quizDetailsBean.question.notes}"
+							autoResize="false" rows="2" />
+					</h:panelGrid>
+
+
+					<p:dataTable id="qat_tb" paginator="false" rows="10"
+						value="#{quizDetailsBean.question.answers}" var="answer"
+						rowsPerPageTemplate="5,10,15,20,25,50"
+						currentPageReportTemplate="Number {startRecord}-{endRecord} From {totalRecords}"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						emptyMessage="No Data Found">
+
+
+						<f:facet name="header">
+							<h:outputText value="Question Answers" />
+						</f:facet>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Answer" />
+							</f:facet>
+							<p:inputText value="#{answer.answerTxt}" />
+						</p:column>
+
+
+						<f:facet name="footer">
+
+							<p:commandButton value="Add Answer" icon="ui-icon-plus"
+								id="add_answer_btn"
+								actionListener="#{quizDetailsBean.addAnswerToQuestion}"
+								update=":quiz_frm:qat_tb" />
+
+
+						</f:facet>
+					</p:dataTable>
+
+					<p:commandButton value="Add" icon="ui-icon-plus" id="addNew_btn"
+						actionListener="#{quizDetailsBean.addQuestionToList}"
+						onstart="PF('waiteDialog').show();"
+						oncomplete="PF('addQuestionDlg').hide();PF('waiteDialog').hide();"
+						update="quiz_frm:qt_tb" />
+
+				</p:dialog>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

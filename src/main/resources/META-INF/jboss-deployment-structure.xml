@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jboss-deployment-structure>
+  <ear-subdeployments-isolated>true</ear-subdeployments-isolated>
+  <sub-deployment name="Quiz.war">
+    <dependencies>
+      <module name="org.primefaces"/>
+    </dependencies>
+    <local-last value="true" />
+  </sub-deployment>
+  <dependencies>          
+    <module name="org.primefaces" slot="main" export="true"/>  
+</dependencies>
+</jboss-deployment-structure>
